@@ -32,6 +32,14 @@
 	    <version>1.2</version>
 	</dependency>
     
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+    <!-- Spring ORM -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-orm</artifactId>
+	    <version>5.2.2.RELEASE</version>
+	</dependency>
+    
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
     <!-- Spring MVC -->
 	<dependency>
