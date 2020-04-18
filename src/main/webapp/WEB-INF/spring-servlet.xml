@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:tx="http://www.springframework.org/schema/tx"
+   xmlns:mvc="http://www.springframework.org/schema/mvc"
+   xsi:schemaLocation="
+   http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+   http://www.springframework.org/schema/mvc
+   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+   http://www.springframework.org/schema/tx 
+   http://www.springframework.org/schema/tx/spring-tx.xsd">
+   
+   
+   <!-- Add Support for Component Scanning -->
+   <context:component-scan base-package="com.sachinmukherjee.spring_hibernate"></context:component-scan>
+   
+   
+   <!-- Add Support for conversion, formatting and validation support -->
+   <mvc:annotation-driven></mvc:annotation-driven>
+   
+   <!-- Css and Js -->
+   <mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+   
+   <!-- Define Spring MVC View Resolver -->
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+   		<property name="prefix" value="/WEB-INF/view/"></property>
+   		<property name="suffix" value=".jsp"></property>
+   </bean>
+   
+   <!-- Define Database Datasource -->
+   <bean id="dataSource"
+           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/spring_hibernate" />
+        <property name="username" value="root" />
+        <property name="password" value="password" />
+   </bean>
+   
+   
+   <!-- Setup Hibernate Session Factory -->
+   <bean id="sessionFactory"
+   		 class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+   		<property name="dataSource" ref="dataSource"></property>
+   		<!-- Packages to Scan for finding hibernate entities -->
+        <property name="packagesToScan" value="com.sachinmukherjee.spring_hibernate.entity" />
+        <property name="hibernateProperties">
+		   <props>
+		      <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+		      <prop key="hibernate.show_sql">true</prop>
+		   </props>
+		</property>
+    </bean> 
+    
+    <!-- Setup Hibernate Transaction Manager -->
+    <bean id="myTransactionManager"
+    	  class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+    	  <property name="sessionFactory" ref="sessionFactory"></property>	  
+   	</bean>
+   
+   <tx:annotation-driven transaction-manager="myTransactionManager"/>
+   
+</beans>
