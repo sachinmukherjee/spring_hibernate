@@ -9,6 +9,12 @@
  <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+	<nav aria-label="breadcrumb">
+  		<ol class="breadcrumb">
+    		<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
+    		<li class="breadcrumb-item" aria-current="page">Users</li>
+    	</ol>
+	</nav>
 <div id="wrapper">
 	<div id="header col-md-12">
 		<h2 style="display: inline-block;">List of Users</h2>

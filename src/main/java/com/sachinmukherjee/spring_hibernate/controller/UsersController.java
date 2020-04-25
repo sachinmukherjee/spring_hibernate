@@ -38,8 +38,6 @@ public class UsersController {
 	
 	@RequestMapping(path="/add", method = {RequestMethod.GET,RequestMethod.POST})
 	public String add(Model model,HttpServletRequest request) {
-		String requestType = request.getMethod();
-		System.out.println(requestType);
 		return "users/add";
 	}
 	

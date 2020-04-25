@@ -2,11 +2,13 @@ package com.sachinmukherjee.spring_hibernate.entity;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,7 +32,10 @@ public class Users {
 	@Column(name = "created_at")
 	private Timestamp created_at;
 
-	
+	@OneToOne(mappedBy = "user",
+			cascade = CascadeType.PERSIST
+			)
+	private EmployeeDetails employee;
 	
 	public Users() {
 	}
@@ -80,6 +85,14 @@ public class Users {
 	
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public EmployeeDetails getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(EmployeeDetails employee) {
+		this.employee = employee;
 	}
 
 	@Override
