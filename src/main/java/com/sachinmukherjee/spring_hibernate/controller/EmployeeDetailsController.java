@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,7 @@ public class EmployeeDetailsController {
 		return "employee_details/index";
 	}
 	
-	@GetMapping("/add")
+	@GetMapping(path="/add")
 	public String add(Model model) {
 		List<Users> users = usersDAO.getUsers();
 		EmployeeDetails employee = new EmployeeDetails();
@@ -43,9 +44,31 @@ public class EmployeeDetailsController {
 		return "employee_details/add";
 	}
 	
+	@GetMapping(path="/edit/{id}")
+	public String edit(@PathVariable int id, Model model) {
+		EmployeeDetails employee = employeeDetailsDAO.getEmploye(id);
+		List<Users> userList = usersDAO.getUsers();
+		model.addAttribute("employee", employee);
+		model.addAttribute("userList", userList);
+		return "employee_details/edit";
+	}
+	
+	@GetMapping(path = "/view/{id}")
+	public String view(@PathVariable int id,Model model) {
+		EmployeeDetails employee = employeeDetailsDAO.getEmploye(id);
+		model.addAttribute("employee", employee);
+		return "/employee_details/view";
+	}
+	
+	@GetMapping(path="/delete/{id}")
+	public String delete(@PathVariable int id) {
+		EmployeeDetails employee = employeeDetailsDAO.getEmploye(id);
+		employeeDetailsDAO.deleteEmployee(employee);
+		return "redirect:/employee_details/";
+	}
+	
 	@PostMapping("/submit")
 	public String submit(EmployeeDetails employee) {
-		System.out.println(employee);
 		employeeDetailsDAO.saveEmployee(employee);
 		return "redirect:/employee_details/";
 	}

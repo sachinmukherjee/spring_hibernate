@@ -11,6 +11,7 @@
 	 		<div class="card-body">
 	    		<a href="${pageContext.request.contextPath}/users/" class="btn btn-primary">Users</a>
 	    		<a href="${pageContext.request.contextPath}/employee_details/" class="btn btn-primary">Employee Details</a>
+	    		<a href="${pageContext.request.contextPath}/owner_company/" class="btn btn-primary">Owner Company</a>
 	  		</div>
 		</div>
 	  </div>	

@@ -12,37 +12,42 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
-    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/employee_details/">Employee Details</a></li>
+    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/owner_company/">Owner Company</a></li>
     <li class="breadcrumb-item active" aria-current="page">View</li>
   </ol>
 </nav>
-	<div class="row col-md-12">
-		<table class="table table-responsive">
-			<tbody>
+	<div class="row">
+	 <div class="col-md-12">
+		<table class="table table-hover">
+			<thead>
 				<tr>
-					<td><b>Username</b></td>
-					<td>${employee.user.username}</td>
+					<th colspan="2" style="text-align: center;">Owner Company</th>
 				</tr>
 				<tr>
-					<td><b>First Name</b></td>
-					<td>${employee.first_name}</td>
+					<th>Name</th>
+					<th>Short Name</th>
 				</tr>
+				<tr>
+					<td>${ownerCompany.name}</td>
+					<td>${ownerCompany.short_name}</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;" colspan="2"><b>Owner Company Offices</b></td>	
+				</tr>
+				<tr>
+					<td><b>Name</b></td>
+					<td><b>Location</b></td>
+				</tr>
+				<c:forEach items="${ownerCompany.ownerCompanyOffices}" var="ownerCompanyOffices">
 					<tr>
-					<td><b>Middle Name</b></td>
-					<td>${employee.middle_name}</td>
-				</tr>
-					<tr>
-					<td><b>Last Name</b></td>
-					<td>${employee.last_name}</td>
-				</tr>
-				</tr>
-					<tr>
-					<td><b>Email</b></td>
-					<td>${employee.email}</td>
-				</tr>
-			</tbody>
+						 <td>${ownerCompanyOffices.name}</td>
+						 <td>${ownerCompanyOffices.location}</td>
+					</tr>
+				</c:forEach>
+			</thead>
 		</table>
-	</div>
-	
+	  </div>
+	  	
+	 </div>
 </body>
 </html>

@@ -18,7 +18,8 @@
 </nav>
 	<form:form	method="POST" action="${pageContext.request.contextPath}/employee_details/submit" modelAttribute="employee" class="form-control">
 		<form:label path="user.id">Username</form:label>
-		<form:select path="user.id">
+		<form:select path="user.id" required="required">
+			<form:option value="${user.get(0)}">Select One</form:option>
 			<c:forEach var="user" items="${userList}">
 			   	<form:option value="${user.id}">${user.username}</form:option>
 			</c:forEach>

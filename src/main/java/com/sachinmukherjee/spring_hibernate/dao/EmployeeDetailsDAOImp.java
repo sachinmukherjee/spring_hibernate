@@ -30,10 +30,12 @@ public class EmployeeDetailsDAOImp implements EmployeeDetailsDAO {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	@Transactional
 	public EmployeeDetails getEmploye(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		EmployeeDetails employee = session.get(EmployeeDetails.class,id);
+		return employee;
 	}
 	
 	@Transactional
@@ -43,8 +45,10 @@ public class EmployeeDetailsDAOImp implements EmployeeDetailsDAO {
 
 	}
 
+	@Transactional
 	public void deleteEmployee(EmployeeDetails employee) {
-		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(employee);
 
 	}
 
