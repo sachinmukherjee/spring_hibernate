@@ -51,7 +51,7 @@
 					<div class="col-md-6 mb-3">
 						<form:label path="owner_company.id">Owner Company</form:label>
 						<form:select path="owner_company.id" cssClass="form-control ownerCompany" required="required">
-							<form:option selected="true" value="${ownerCompanies.get(0)}">Select</form:option>
+							<form:option selected="true" value="${ownerCompany.get(0)}">Select</form:option>
 							<c:forEach items="${ownerCompanies}" var="ownerCompany">
 								<form:option value="${ownerCompany.id}">${ownerCompany.name}</form:option>
 							</c:forEach>
@@ -87,4 +87,29 @@
 			$(input).attr("type","password");
 		}
 	});
+	
+	$(".ownerCompany").on("change", function(){
+		var value = $(this).val();
+		console.log(value);
+		if(value == ""){
+			alert("Select a Company");
+			return;
+		}else{
+			getAllOffices(value);
+		}
+	});
+	
+	function getAllOffices(value){
+		$.ajax({
+			url:"${pageContext.request.contextPath}/owner_company/allOffices",
+			method:"GET",
+			data: {
+				"ownerCompanyId":value
+			}
+		})
+		.done(function(data){
+				console.log(data);
+		});
+		
+	}
 </script>
