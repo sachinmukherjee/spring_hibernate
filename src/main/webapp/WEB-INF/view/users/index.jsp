@@ -5,9 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Users</title>
- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-2.0.3.min.js"></script>
- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
- <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+ <jsp:include page="../static.jsp"></jsp:include>
 </head>
 <body>
 	<nav aria-label="breadcrumb">
@@ -18,38 +16,38 @@
 	</nav>
 <div id="container">
 	<div id="header col-md-12">
-		<h2 style="display: inline-block;">List of Users</h2>
-		<a href="${pageContext.request.contextPath}/users/add/" class="btn btn-success float-right">Add</a>
+		<h2 class="d-block ml-2">List of Users<span><a href="${pageContext.request.contextPath}/users/add/" class="btn btn-success float-right">Add</a></span></h2>
 	</div>
-	<div id="container">
-		
-		<div id="content">
-			<table class="table table-hover">
-				<thead>
+	<div class="row">
+		<table class="table table-striped ml-3">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Username</th>
+					<th>User Fullname</th>
+					<th>Company Name</th>
+					<th>Company Location</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${users}" var="user">
 					<tr>
-						<th>Id</th>
-						<th>Username</th>
-						<th>Userfullname</th>
-						<th>Action</th>
-					</tr>
-				</thead>	
-				<tbody>
-					<c:forEach var="user" items="${users}">
-						<tr>
-							<td>${user.id}</td>
-							<td>${user.username}</td>
-							<td>${user.userfullname}</td>
-							<td>
+						<td>${user.id}</td>
+						<td>${user.username}</td>
+						<td>${user.userfullname}</td>
+						<td>${user.owner_company.name}</td>
+						<td>${user.ownerCompanyOffices.name} ${user.ownerCompanyOffices.location}</td>
+						<td>	
 								<a href="${pageContext.request.contextPath}/users/edit/${user.id}">Edit</a>
 								<a href="${pageContext.request.contextPath}/users/view/${user.id}">View</a>
 								<a href="${pageContext.request.contextPath}/users/delete/${user.id}">Delete</a>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-	</div>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div> 
 </div>
 
 </body>
