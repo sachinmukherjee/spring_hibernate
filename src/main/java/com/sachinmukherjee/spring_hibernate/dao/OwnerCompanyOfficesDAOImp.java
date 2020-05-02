@@ -6,6 +6,8 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.NamedQuery;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,12 +19,14 @@ public class OwnerCompanyOfficesDAOImp implements OwnerCompanyOfficesDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 	
+	@SuppressWarnings("unchecked")
 	public List<OwnerCompanyOffices> getAllOffices() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		Query<OwnerCompanyOffices> offices = session.createQuery("from OwnerCompanyOffices");
+		List<OwnerCompanyOffices> ownerCompanyOffices = offices.getResultList();
+		return ownerCompanyOffices;
 	}
 	
-	@Transactional
 	public void saveOffice(OwnerCompanyOffices ownerCompanyOffice) {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(ownerCompanyOffice);
@@ -30,13 +34,23 @@ public class OwnerCompanyOfficesDAOImp implements OwnerCompanyOfficesDAO {
 	}
 
 	public OwnerCompanyOffices getOwnerCompanyOffices(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		OwnerCompanyOffices ownerCompanyOffices = session.get(OwnerCompanyOffices.class, id);
+		return ownerCompanyOffices;
 	}
 
-	public void delete(OwnerCompanyOffices ownerCompanyOffice) {
-		// TODO Auto-generated method stub
-
+	public void delete(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		OwnerCompanyOffices ownerCompanyOffices = session.get(OwnerCompanyOffices.class, id);
+		session.delete(ownerCompanyOffices);
 	}
 
+	public List<OwnerCompanyOffices> getOwnerCompanyOfficesList(int ownerCompanyId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query<OwnerCompanyOffices> query = session.createNamedQuery("OwnerCompanyOfficesLists", OwnerCompanyOffices.class);
+		query.setParameter("ownerCompanyId", ownerCompanyId);
+		List<OwnerCompanyOffices> ownerCompanyOffices = query.getResultList();
+		return ownerCompanyOffices;
+	}
+																																													
 }

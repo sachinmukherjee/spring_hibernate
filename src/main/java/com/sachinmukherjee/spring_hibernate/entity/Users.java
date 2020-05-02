@@ -44,14 +44,19 @@ public class Users {
 	@JoinColumn(name = "owner_company_id")
 	private OwnerCompany owner_company;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "owner_company_offices_id")
+	private OwnerCompanyOffices ownerCompanyOffices;
+	
 	public Users() {
 	}
 
-	public Users(String username, String password, String userfullname,OwnerCompany owner_company) {
+	public Users(String username, String password, String userfullname,OwnerCompany owner_company,OwnerCompanyOffices ownerCompanyOffices) {
 		this.username = username;
 		this.password = password;
 		this.userfullname = userfullname;
 		this.owner_company = owner_company;
+		this.ownerCompanyOffices = ownerCompanyOffices;
 	}
 
 	public String getUsername() {
@@ -109,6 +114,14 @@ public class Users {
 
 	public void setOwner_company(OwnerCompany owner_company) {
 		this.owner_company = owner_company;
+	}
+	
+	public OwnerCompanyOffices getOwnerCompanyOffices() {
+		return ownerCompanyOffices;
+	}
+
+	public void setOwnerCompanyOffices(OwnerCompanyOffices ownerCompanyOffices) {
+		this.ownerCompanyOffices = ownerCompanyOffices;
 	}
 
 	@Override

@@ -12,5 +12,8 @@ public interface OwnerCompanyOfficesDAO {
 	
 	public OwnerCompanyOffices getOwnerCompanyOffices(int id);
 	
-	public void delete(OwnerCompanyOffices ownerCompanyOffice);
+	public void delete(int id);
+	
+	//Ajax method for all offices of a company
+	public List<OwnerCompanyOffices> getOwnerCompanyOfficesList(int ownerCompanyId);
 }

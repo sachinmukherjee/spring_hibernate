@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Users</title>
  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-2.0.3.min.js"></script>
  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
@@ -15,7 +16,7 @@
     		<li class="breadcrumb-item" aria-current="page">Users</li>
     	</ol>
 	</nav>
-<div id="wrapper">
+<div id="container">
 	<div id="header col-md-12">
 		<h2 style="display: inline-block;">List of Users</h2>
 		<a href="${pageContext.request.contextPath}/users/add/" class="btn btn-success float-right">Add</a>

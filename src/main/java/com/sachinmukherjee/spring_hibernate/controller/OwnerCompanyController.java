@@ -3,6 +3,9 @@ package com.sachinmukherjee.spring_hibernate.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,21 +14,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
-import com.sachinmukherjee.spring_hibernate.dao.OwnerCompanyDAO;
 import com.sachinmukherjee.spring_hibernate.entity.OwnerCompany;
 import com.sachinmukherjee.spring_hibernate.entity.OwnerCompanyOffices;
+import com.sachinmukherjee.spring_hibernate.service.OwnerCompanyOfficesService;
+import com.sachinmukherjee.spring_hibernate.service.OwnerCompanyService;
 
 @Controller
 @RequestMapping("/owner_company/")
 public class OwnerCompanyController {
 	
 	@Autowired
-	private OwnerCompanyDAO ownerCompanyDAO;
+	private OwnerCompanyService ownerCompanyService;
+	
+	@Autowired
+	private OwnerCompanyOfficesService ownerCompanyOfficesService;
 	
 	@GetMapping("/")
 	public String index(Model model) {
-		List<OwnerCompany> ownerCompany = ownerCompanyDAO.getAllOwnerCompanies();
+		List<OwnerCompany> ownerCompany = ownerCompanyService.getAllOwnerCompanies();
 		model.addAttribute("ownerCompanies", ownerCompany);
 		return "owner_company/index";
 	}
@@ -42,27 +50,37 @@ public class OwnerCompanyController {
 	@PostMapping("/submit")
 	public String submit(@ModelAttribute("ownerCompany") OwnerCompany ownerCompany) {
 		System.out.println(ownerCompany);
-		ownerCompanyDAO.saveCompany(ownerCompany);
+		ownerCompanyService.addOwnerCompany(ownerCompany);
 		return "redirect:/owner_company/";
 	}
 	
 	@GetMapping(path="/edit/{id}")
 	public String edit(@PathVariable int id, Model model) {
-		OwnerCompany ownerCompany = ownerCompanyDAO.getOwnerCompany(id);
+		OwnerCompany ownerCompany = ownerCompanyService.getOwnerCompany(id);
 		model.addAttribute("ownerCompany", ownerCompany);
 		return "owner_company/edit";
 	}
 	
 	@GetMapping("/view/{id}")
 	public String view(@PathVariable int id, Model model) {
-		OwnerCompany ownerCompany = ownerCompanyDAO.getOwnerCompany(id);
+		OwnerCompany ownerCompany = ownerCompanyService.getOwnerCompany(id);
 		model.addAttribute("ownerCompany", ownerCompany);
 		return "owner_company/view";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
-		ownerCompanyDAO.deleteOwnerCompany(id);
+		ownerCompanyService.deleteOwnerCompany(id);
 		return "redirect:/owner_company/";
+	}
+	
+	@GetMapping("/allOffices")
+	@ResponseBody
+	public String getAllOffices(@RequestParam("ownerCompanyId") int ownerCompanyId, HttpServletRequest request, HttpServletResponse response) {
+		List<OwnerCompanyOffices> offices = ownerCompanyOfficesService.getAllOfficesOfOwnerCompanies(ownerCompanyId);
+		System.out.println(offices);
+		System.out.println(ownerCompanyId);
+		return " ";
+		
 	}
 }

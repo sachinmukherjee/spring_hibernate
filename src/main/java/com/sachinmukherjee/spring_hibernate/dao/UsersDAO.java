@@ -7,8 +7,6 @@ public interface UsersDAO {
 	
 	public List<Users> getUsers();
 	
-	public void add();
-	
 	public Users getUser(int id);
 	
 	public void saveUser(Users user);

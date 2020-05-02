@@ -34,7 +34,7 @@ public class OwnerCompany {
 	
 	@OneToMany(mappedBy = "ownerCompany", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<OwnerCompanyOffices> ownerCompanyOffices;
-
+	
 	public OwnerCompany() {
 		super();
 		// TODO Auto-generated constructor stub

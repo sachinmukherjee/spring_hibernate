@@ -1,5 +1,7 @@
 package com.sachinmukherjee.spring_hibernate.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table(name="owner_company_offices")
+@NamedQuery(name = "OwnerCompanyOfficesLists",
+			query = "from OwnerCompanyOffices where owner_company_id = :ownerCompanyId"
+			)
 public class OwnerCompanyOffices {
 	
 	@Id
@@ -29,10 +37,12 @@ public class OwnerCompanyOffices {
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "owner_company_id")
 	private OwnerCompany ownerCompany;
+	
+	@OneToMany(mappedBy = "ownerCompanyOffices", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+	private List<Users> users;
 
 	public OwnerCompanyOffices() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public OwnerCompanyOffices(String name, String location) {
@@ -70,6 +80,14 @@ public class OwnerCompanyOffices {
 
 	public void setOwnerCompany(OwnerCompany ownerCompany) {
 		this.ownerCompany = ownerCompany;
+	}
+	
+	public List<Users> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<Users> users) {
+		this.users = users;
 	}
 
 	@Override

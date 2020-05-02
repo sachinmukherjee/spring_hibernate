@@ -20,7 +20,6 @@ public class OwnerCompanyDAOImp implements OwnerCompanyDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	@Transactional
 	public List<OwnerCompany> getAllOwnerCompanies() {
 		Session session = sessionFactory.getCurrentSession();
 		Query<OwnerCompany> ownerCompaniesQuery = 
@@ -29,7 +28,6 @@ public class OwnerCompanyDAOImp implements OwnerCompanyDAO {
 		return ownerCompany;
 	}
 	
-	@Transactional
 	public void saveCompany(OwnerCompany owner_company) {
 		Session session = sessionFactory.getCurrentSession();
 		List<OwnerCompanyOffices> ownerCompanyOffices = owner_company.getOwnerCompanyOffices();
@@ -41,14 +39,12 @@ public class OwnerCompanyDAOImp implements OwnerCompanyDAO {
 		session.saveOrUpdate(owner_company);
 	}
 	
-	@Transactional
 	public OwnerCompany getOwnerCompany(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		OwnerCompany ownerCompany = session.get(OwnerCompany.class,id);
 		return ownerCompany;
 	}
 	
-	@Transactional
 	public void deleteOwnerCompany(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		OwnerCompany owner_company = session.get(OwnerCompany.class,id);

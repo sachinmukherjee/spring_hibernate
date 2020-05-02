@@ -19,7 +19,6 @@ public class UsersDAOImp implements UsersDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	@Transactional
 	public List<Users> getUsers() {
 		
 		//get the hibernate session
@@ -33,12 +32,6 @@ public class UsersDAOImp implements UsersDAO {
 		return users;
 	}
 	
-	@Transactional
-	public void add() {
-			
-	}
-	
-	@Transactional
 	public Users getUser(int id) {
 		
 		Session session = sessionFactory.getCurrentSession();
@@ -46,7 +39,6 @@ public class UsersDAOImp implements UsersDAO {
 		return user;
 	}
 	
-	@Transactional
 	public void saveUser(Users user) {
 		
 		Session session = sessionFactory.getCurrentSession();
@@ -54,7 +46,6 @@ public class UsersDAOImp implements UsersDAO {
 		
 	}
 	
-	@Transactional
 	public void deleteUser(int id) {
 		
 		Session session = sessionFactory.getCurrentSession();
