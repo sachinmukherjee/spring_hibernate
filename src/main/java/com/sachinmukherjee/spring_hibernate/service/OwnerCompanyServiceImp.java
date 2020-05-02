@@ -31,7 +31,7 @@ public class OwnerCompanyServiceImp implements OwnerCompanyService {
 		ownerCompanyDAO.deleteOwnerCompany(id);
 
 	}
-	
+	//Calling a Ajax Method
 	public List<OwnerCompany> getAllOwnerCompanies(){
 		return ownerCompanyDAO.getAllOwnerCompanies();
 	}

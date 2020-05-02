@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "owner_company")
@@ -33,6 +35,7 @@ public class OwnerCompany {
 	private Set<Users>  users;
 	
 	@OneToMany(mappedBy = "ownerCompany", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
 	private List<OwnerCompanyOffices> ownerCompanyOffices;
 	
 	public OwnerCompany() {

@@ -44,7 +44,8 @@ public class OwnerCompanyOfficesDAOImp implements OwnerCompanyOfficesDAO {
 		OwnerCompanyOffices ownerCompanyOffices = session.get(OwnerCompanyOffices.class, id);
 		session.delete(ownerCompanyOffices);
 	}
-
+	
+	//Ajax Call
 	public List<OwnerCompanyOffices> getOwnerCompanyOfficesList(int ownerCompanyId) {
 		Session session = sessionFactory.getCurrentSession();
 		Query<OwnerCompanyOffices> query = session.createNamedQuery("OwnerCompanyOfficesLists", OwnerCompanyOffices.class);

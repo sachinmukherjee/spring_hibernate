@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.sachinmukherjee.spring_hibernate.entity.OwnerCompany;
 import com.sachinmukherjee.spring_hibernate.entity.Users;
 import com.sachinmukherjee.spring_hibernate.service.OwnerCompanyService;
@@ -30,7 +28,7 @@ public class UsersController {
 	@Autowired
 	private OwnerCompanyService ownerCompanySerivce;
 	
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String index(Model model) {
 		
 		//get users from dao
@@ -40,7 +38,7 @@ public class UsersController {
 		return "users/index";
 	}
 	
-	@RequestMapping(path="/add", method = {RequestMethod.GET,RequestMethod.POST})
+	@GetMapping(path="/add")
 	public String add(Model model,HttpServletRequest request) {
 		Users user = new Users();
 		List<OwnerCompany> ownerCompanies = ownerCompanySerivce.getAllOwnerCompanies();

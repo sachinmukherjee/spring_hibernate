@@ -5,14 +5,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
@@ -74,13 +76,15 @@ public class OwnerCompanyController {
 		return "redirect:/owner_company/";
 	}
 	
-	@GetMapping("/allOffices")
+	//Ajax Method
+	@RequestMapping(path = "/allOffices",method = RequestMethod.GET)
 	@ResponseBody
-	public String getAllOffices(@RequestParam("ownerCompanyId") int ownerCompanyId, HttpServletRequest request, HttpServletResponse response) {
+	public List<OwnerCompanyOffices> getAllOffices(@RequestParam("ownerCompanyId") int ownerCompanyId, HttpServletResponse response) {
 		List<OwnerCompanyOffices> offices = ownerCompanyOfficesService.getAllOfficesOfOwnerCompanies(ownerCompanyId);
 		System.out.println(offices);
-		System.out.println(ownerCompanyId);
-		return " ";
+		response.setContentType("application/json");
+		response.setStatus(200);
+		return offices;
 		
 	}
 }

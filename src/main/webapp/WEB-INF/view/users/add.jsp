@@ -4,9 +4,7 @@
 <html>
 <head>
  <title>Add</title>
- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-2.0.3.min.js"></script>
- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
- <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+ <jsp:include page="../static.jsp"></jsp:include>
 </head>
 <body class="bg-light">
 <nav aria-label="breadcrumb">
@@ -17,7 +15,7 @@
   </ol>
 </nav>
 <div class="container">
-	<div class="py-5  mx-auto">
+	<div class="py-3  mx-auto">
 		<i class="d-block mx-auto mb-4"></i>
 		<h2>User Form</h2>
 		<p class="lead">
@@ -40,11 +38,11 @@
 				<div class="row">
 					<div class="col-md-6 mb-3">
 						<form:label path="password">Password</form:label>
-						<form:input path="password" cssClass="form-control"/>
+						<form:input path="password" cssClass="form-control" type="password"/>
 					</div>
 					<div class="col-md-6 mb-3">
 						<form:label path="password">Re enter Password</form:label>
-						<form:input path="password" cssClass="form-control"/>
+						<form:input path="password" cssClass="form-control" type="password"/>
 					</div>
 				</div>
 				<div class="row">
@@ -63,6 +61,9 @@
 							
 						</form:select>
 					</div>
+				</div>
+				<div class="row">
+					<button type="submit" class="btn btn-success ml-3">Save</button>
 				</div>
 			
 			</form:form>
@@ -90,7 +91,6 @@
 	
 	$(".ownerCompany").on("change", function(){
 		var value = $(this).val();
-		console.log(value);
 		if(value == ""){
 			alert("Select a Company");
 			return;
@@ -99,16 +99,25 @@
 		}
 	});
 	
+	//Ajax for all owner company offices;
 	function getAllOffices(value){
 		$.ajax({
 			url:"${pageContext.request.contextPath}/owner_company/allOffices",
 			method:"GET",
+			dataType:"json",
 			data: {
 				"ownerCompanyId":value
+			},
+			success:function(data,status){
+				var html = "<option value=''>Select One</option>";
+				$.each(data, function(){
+					html += "<option value="+this.id+">"+this.name+" || "+this.location +"</option>";
+				});
+				$(".ownerCompanyOffice").html(html);
+			},
+			error:function(){
+				alert("No Office Found");
 			}
-		})
-		.done(function(data){
-				console.log(data);
 		});
 		
 	}

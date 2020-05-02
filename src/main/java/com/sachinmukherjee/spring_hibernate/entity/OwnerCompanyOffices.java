@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.NamedQuery;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="owner_company_offices")
 @NamedQuery(name = "OwnerCompanyOfficesLists",
@@ -35,10 +37,12 @@ public class OwnerCompanyOffices {
 	private String location;
 	
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JsonIgnore
 	@JoinColumn(name = "owner_company_id")
 	private OwnerCompany ownerCompany;
 	
 	@OneToMany(mappedBy = "ownerCompanyOffices", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Users> users;
 
 	public OwnerCompanyOffices() {
