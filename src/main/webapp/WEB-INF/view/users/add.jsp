@@ -47,7 +47,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 mb-3">
-						<form:label path="owner_company.id">Owner Company</form:label>
+						<form:label path="owner_company.id">Company</form:label>
 						<form:select path="owner_company.id" cssClass="form-control ownerCompany" required="required">
 							<form:option selected="true" value="${ownerCompany.get(0)}">Select</form:option>
 							<c:forEach items="${ownerCompanies}" var="ownerCompany">
@@ -56,7 +56,7 @@
 						</form:select>
 					</div>
 					<div class="col-md-6 mb-3">
-						<form:label path="ownerCompanyOffices.id">Owner Company Office</form:label>
+						<form:label path="ownerCompanyOffices.id">Office</form:label>
 						<form:select path="ownerCompanyOffices.id" cssClass="form-control ownerCompanyOffice" required="required">
 							
 						</form:select>
@@ -73,22 +73,7 @@
 </div>
  </body>
 </html>
-<style type="text/css">
-	.show{
-		font-size: 12px;
-	}
-</style>
 <script>
-	$(".show").on("click", function(){
-		var input = $(".password");
-		var type = $(input).attr("type");
-		if(type == "password"){
-			$(input).attr("type","text");
-		}else{
-			$(input).attr("type","password");
-		}
-	});
-	
 	$(".ownerCompany").on("change", function(){
 		var value = $(this).val();
 		if(value == ""){

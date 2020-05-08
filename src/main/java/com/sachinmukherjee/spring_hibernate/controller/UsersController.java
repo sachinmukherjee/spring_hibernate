@@ -1,9 +1,7 @@
 package com.sachinmukherjee.spring_hibernate.controller;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import com.sachinmukherjee.spring_hibernate.entity.OwnerCompany;
 import com.sachinmukherjee.spring_hibernate.entity.Users;
 import com.sachinmukherjee.spring_hibernate.service.OwnerCompanyService;
@@ -50,6 +47,8 @@ public class UsersController {
 	@GetMapping(path="/edit/{id}")
 	public String edit(Model model, @PathVariable int id) {
 		Users user = userService.getUser(id);
+		List<OwnerCompany> ownerCompanyList = ownerCompanySerivce.getAllOwnerCompanies();
+		model.addAttribute("ownerCompanies", ownerCompanyList);
 		model.addAttribute("user", user);
 		return "users/edit";
 	}

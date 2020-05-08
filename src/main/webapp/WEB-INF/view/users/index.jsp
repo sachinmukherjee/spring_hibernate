@@ -18,6 +18,9 @@
 	<div id="header col-md-12">
 		<h2 class="d-block ml-2">List of Users<span><a href="${pageContext.request.contextPath}/users/add/" class="btn btn-success float-right">Add</a></span></h2>
 	</div>
+	<form action="${pageContext.request.contextPath}/users/" method="GET">
+	
+	</form>
 	<div class="row">
 		<table class="table table-striped ml-3">
 			<thead>
@@ -25,8 +28,8 @@
 					<th>Id</th>
 					<th>Username</th>
 					<th>User Fullname</th>
-					<th>Company Name</th>
-					<th>Company Location</th>
+					<th>Company</th>
+					<th>Office</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -48,6 +51,16 @@
 			</tbody>
 		</table>
 	</div> 
+	<nav aria-label="Page navigation example" class="pull-right">
+	  <ul class="pagination">
+	    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+	    <li class="page-item"><a class="page-link" href="#">1</a></li>
+	    <li class="page-item"><a class="page-link" href="#">2</a></li>
+	    <li class="page-item"><a class="page-link" href="#">3</a></li>
+	    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+	  </ul>
+	</nav>
+	
 </div>
 
 </body>

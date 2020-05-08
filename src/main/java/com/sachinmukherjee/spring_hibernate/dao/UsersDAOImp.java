@@ -1,8 +1,6 @@
 package com.sachinmukherjee.spring_hibernate.dao;
 
 import java.util.List;
-
-import javax.transaction.Transactional;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,7 +24,7 @@ public class UsersDAOImp implements UsersDAO {
 		//create a query 
 		Query<Users> theQuery = 
 					 session.createQuery("from Users", Users.class);
-		//execute the query and get resultset
+		//execute the query and get result set
 		List<Users> users = theQuery.getResultList();
  		//return the result
 		return users;

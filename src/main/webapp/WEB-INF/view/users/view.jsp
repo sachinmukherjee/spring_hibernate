@@ -14,10 +14,52 @@
     <li class="breadcrumb-item active" aria-current="page">View</li>
   </ol>
 </nav>
-<div class="col-md-12">
-	<p>Username: ${user.username}</p>
-	<p>Password: ${user.password}</p>
-	<p>Userfullname: ${user.userfullname}</p>
+<div class="container">
+	<div class="py-3  mx-auto">
+		<i class="d-block mx-auto mb-4"></i>
+		<h2>User Form</h2>
+		<p class="lead">
+			View User Details
+		</p>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-4">
+					<label>Username</label>
+				</div>
+				<div class="col-md-4">
+					${user.username}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<label>Userfullame</label>
+				</div>
+				<div class="col-md-4">
+					${user.userfullname}
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-4">
+					<label>Company</label>
+				</div>
+				<div class="col-md-4">
+					${user.owner_company.name}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<label>Office</label>
+				</div>
+				<div class="col-md-4">
+					${user.ownerCompanyOffices.name}
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 </html>
